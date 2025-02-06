@@ -3,6 +3,8 @@ package com.eventmanagement.demo.controller;
 import com.eventmanagement.demo.entity.Users;
 import com.eventmanagement.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,5 +25,12 @@ public class UserController {
         String token = userService.verify(user);
         return token;
     }
+
+    @GetMapping("/auth")
+    public String auth()
+    {
+        return "success";
+    }
+
 
 }
