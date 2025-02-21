@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.PublicKey;
+import java.util.List;
+
 @RestController
 public class UserController {
     @Autowired
@@ -26,10 +29,33 @@ public class UserController {
         return token;
     }
 
+    @GetMapping("promote/admin/{id}")
+    public String promoteUser(@PathVariable String id){
+        Users users= userService.promote(id);
+        return "user promotes admins ";
+    }
+
+    @GetMapping("/getAll")
+    public List<Users> getAll(){
+        return userService.getAll();
+    }
+
+
+
+
+
+
     @GetMapping("/auth")
     public String auth()
     {
-        return "success";
+        return "success admin";
+    }
+
+
+    @GetMapping("/authuser")
+    public String authuser()
+    {
+        return "success user";
     }
 
 
