@@ -16,9 +16,13 @@ public class Event {
     private LocalDateTime endTime;
     private String location;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "organizer_id", nullable = false)
     private Users organizer;
+
+    @Version  // Add this field
+    @Column(nullable = false) // Ensure the column is never null
+    private Integer version = 0;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

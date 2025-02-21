@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,6 +31,7 @@ public class UserService {
 
     public Users register(Users user){
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRole(Role.Role_USER);
         userRepo.save(user);
         return user;
     }
@@ -43,6 +45,16 @@ public class UserService {
         return "fail";
     }
 
+    public Users promote(String id) {
+        Optional<Users> user = userRepo.findById(id);
+        user.get().setRole(Role.Role_ADMIN);
+        userRepo.save(user.get());
+        return user.get();
+    }
+
+    public List<Users> getAll() {
+        return userRepo.findAll();
+    }
 
 
 //    public Users signUp(Users user){
