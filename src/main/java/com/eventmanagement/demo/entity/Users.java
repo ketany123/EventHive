@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 @Entity
 public class Users {
 
-
     @Id
     private String id;
     private String username;
